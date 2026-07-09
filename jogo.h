@@ -9,5 +9,6 @@ void pontuacoes();
 void iniciarMapa();
 void mostrarMapa();
 void moverJogador(char movimento);
+void verificarObjetivo();
 
 #endif

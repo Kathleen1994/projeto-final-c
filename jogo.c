@@ -16,6 +16,8 @@ char mapa[10][10] = {
 
 int jogadorLinha = 8;
 int jogadorColuna = 1;
+int pontos = 0;
+int temChave = 0;
 
 
 void menu() {
@@ -41,6 +43,8 @@ void novoJogo() {
         scanf(" %c", &movimento);
 
         moverJogador(movimento);
+verificarObjetivo();
+
 
     } while(movimento != 'x' && movimento != 'X');
 
@@ -106,6 +110,36 @@ void moverJogador(char movimento) {
         jogadorColuna = novaColuna;
 
         mapa[jogadorLinha][jogadorColuna] = 'P';
+    }
+
+}
+void verificarObjetivo() {
+
+    if(mapa[jogadorLinha][jogadorColuna] == 'K') {
+
+        temChave = 1;
+        pontos += 50;
+
+        printf("\nEncontraste a chave! +50 pontos\n");
+
+    }
+
+
+    if(mapa[jogadorLinha][jogadorColuna] == 'T') {
+
+        if(temChave) {
+
+            pontos += 100;
+
+            printf("\nPARABENS! Encontraste o tesouro!\n");
+            printf("Pontuacao final: %d\n", pontos);
+
+        } else {
+
+            printf("\nPrecisas da chave primeiro!\n");
+
+        }
+
     }
 
 }
