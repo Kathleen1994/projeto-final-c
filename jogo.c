@@ -5,10 +5,10 @@ char mapa[10][10] = {
     "#########",
     "#.......#",
     "#...T...#",
-    "#.......#",
+    "#..X....#",
     "#...K...#",
     "#.......#",
-    "#.......#",
+    "#....X..#",
     "#.......#",
     "#P......#",
     "#########"
@@ -18,6 +18,7 @@ int jogadorLinha = 8;
 int jogadorColuna = 1;
 int pontos = 0;
 int temChave = 0;
+int vidas = 3;
 
 
 void menu() {
@@ -31,26 +32,23 @@ void menu() {
 }
 
 
-void novoJogo() {
-
-    char movimento;
+void novoJogo() {    char movimento;
 
     do {
 
         mostrarMapa();
 
+printf("\nVidas: %d | Pontos: %d\n", vidas, pontos);
+
         printf("\nMover (W/A/S/D) ou X para sair: ");
         scanf(" %c", &movimento);
 
         moverJogador(movimento);
-verificarObjetivo();
-
+ verificarObjetivo();
 
     } while(movimento != 'x' && movimento != 'X');
 
 }
-
-
 void regras() {
 
     printf("\nObjetivo: encontrar o tesouro T.\n");
