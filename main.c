@@ -27,8 +27,10 @@ int main() {
                 break;
 
             case 0:
-                printf("\nObrigado por jogar!\n");
-                break;
+
+    printf("\nObrigado por jogar!\n");
+
+    break;
 
             default:
                 printf("\nOpcao invalida!\n");

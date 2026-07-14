@@ -5,10 +5,9 @@ void menu();
 void novoJogo();
 void regras();
 void pontuacoes();
-
-void iniciarMapa();
 void mostrarMapa();
 void moverJogador(char movimento);
 void verificarObjetivo();
+void guardarPontuacao();
 
 #endif

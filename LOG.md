@@ -66,32 +66,18 @@ Início do Prejeto 20/05/2026
 
 ## Sessão 3
 
-**Data:** 08/07/2026
+**Data:** 14/07/2026
 
- Objetivos
+### Funcionalidades implementadas
 
-* Criar o mapa do jogo.
-* Implementar o movimento do jogador.
-
- Trabalho realizado
-
-* Criação da matriz que representa o mapa.
-* Implementação da visualização do mapa.
-* Desenvolvimento do movimento do jogador com as teclas W, A, S e D.
-* Impedimento da passagem pelas paredes.
-
- Problemas encontrados
-
-* Erros de compilação relacionados com os protótipos das funções.
-
- Solução
-
-* Atualização do ficheiro `jogo.h`.
-* Correção da assinatura da função `moverJogador`.
-
- Resultado
-
-* Movimento do jogador implementado com sucesso.
+- Sistema de vidas
+- Armadilhas
+- Chave
+- Tesouro
+- Sistema de pontuação
+- Gravação das pontuações em ficheiro
+- Melhorias no menu
+- Atualização do READMEmplementado com sucesso.
 
 ---
 
