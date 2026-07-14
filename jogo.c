@@ -1,5 +1,15 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "jogo.h"
+
+#define RESET "\033[0m"
+#define VERMELHO "\033[31m"
+#define VERDE "\033[32m"
+#define AMARELO "\033[33m"
+#define AZUL "\033[34m"
+#define ROXO "\033[35m"
+#define CIANO "\033[36m"
+#define BRANCO "\033[37m"
 
 char mapa[10][10] = {
     "#########",
@@ -26,14 +36,17 @@ char nomeJogador[50];
 
 void menu() {
 
-    printf("\n==============================\n");
-    printf("      CAÇA AO TESOURO\n");
-    printf("==============================\n");
-    printf("1 - Novo Jogo\n");
-    printf("2 - Regras\n");
-    printf("3 - Pontuações\n");
-    printf("0 - Sair\n");
-    printf("==============================\n");
+    printf("\n");
+    printf(AZUL "==============================\n" RESET);
+    printf(AMARELO "        CAÇA AO TESOURO\n" RESET);
+    printf(AZUL "==============================\n" RESET);
+
+    printf(VERDE "1" RESET " - Novo Jogo\n");
+    printf(CIANO "2" RESET " - Regras\n");
+    printf(ROXO "3" RESET " - Pontuações\n");
+    printf(VERMELHO "0" RESET " - Sair\n");
+
+    printf(AZUL "==============================\n" RESET);
 
 }
 
@@ -47,7 +60,17 @@ scanf("%49s", nomeJogador);
 
     do {
 
+        limparTela();
+
         mostrarMapa();
+
+        printf("\nVidas: ");
+
+for(int i = 0; i < vidas; i++) {
+    printf(VERMELHO "❤️ " RESET);
+}
+
+printf(" | Pontos: %d\n", pontos);
 
         printf("\nMover (W/A/S/D) ou X para sair: ");
         scanf(" %c", &movimento);
@@ -55,10 +78,24 @@ scanf("%49s", nomeJogador);
         moverJogador(movimento);
         verificarObjetivo();
 
-    } while (movimento != 'x' &&
-             movimento != 'X' &&
-             vidas > 0 &&
-             !jogoTerminado);
+   } while(movimento != 'x' &&
+        movimento != 'X' &&
+        jogoTerminado == 0);
+
+
+if(jogoTerminado == 1 && vidas <= 0) {
+
+    printf("\n==============================\n");
+    printf("          GAME OVER\n");
+    printf("==============================\n");
+    printf("Ficaste sem vidas!\n");
+    printf("Pontuação final: %d\n", pontos);
+
+    printf("\nPressiona ENTER para voltar ao menu...");
+    getchar();
+    getchar();
+}
+
 
 }
 void regras() {
@@ -133,28 +170,34 @@ void moverJogador(char movimento)
 }
 void verificarObjetivo() {
 
-    if(casaAtual == 'X') {
+   if(casaAtual == 'X') {
 
-        vidas--;
-        pontos -= 20;
+    vidas--;
+    pontos -= 20;
 
-        if(pontos < 0)
-            pontos = 0;
+    if(pontos < 0)
+        pontos = 0;
 
-        printf("\nCaíste numa armadilha!\n");
-        printf("Perdeste uma vida.\n");
+    printf("\n==============================\n");
+    printf("     CAÍSTE NUMA ARMADILHA!\n");
+    printf("==============================\n");
 
-        if(vidas == 0) {
+    printf("Perdeste uma vida.\n");
+    printf("Vidas restantes: %d\n", vidas);
 
-            printf("\n==============================\n");
-            printf("        GAME OVER\n");
-            printf("==============================\n");
-            printf("Pontuação final: %d\n", pontos);
-jogoTerminado = 1;
 
-        }
+    if(vidas <= 0) {
 
+        printf("\n==============================\n");
+        printf("          GAME OVER\n");
+        printf("==============================\n");
+        printf("Ficaste sem vidas!\n");
+        printf("Pontuação final: %d\n", pontos);
+
+        jogoTerminado = 1;
     }
+
+}
 
     if(casaAtual == 'K') {
 
@@ -211,14 +254,51 @@ void mostrarMapa() {
 
     int i, j;
 
+    printf("\n");
+
     for(i = 0; i < 10; i++) {
 
         for(j = 0; j < 10; j++) {
 
-            printf("%c ", mapa[i][j]);
+            char elemento = mapa[i][j];
 
+            switch(elemento) {
+
+                case '#':
+                    printf(AZUL "██ " RESET);
+                    break;
+
+                case 'P':
+                    printf(VERDE "😀 " RESET);
+                    break;
+
+                case 'T':
+                    printf(AMARELO "💎 " RESET);
+                    break;
+
+                case 'K':
+                    printf(ROXO "🔑 " RESET);
+                    break;
+
+                case 'X':
+                    printf(VERMELHO "💀 " RESET);
+                    break;
+
+                case '.':
+                    printf(BRANCO "·  " RESET);
+                    break;
+
+                default:
+                    printf("   ");
+            }
         }
 
         printf("\n");
     }
 }
+
+   void limparTela() {
+
+    system("clear");
+
+   }

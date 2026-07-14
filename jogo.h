@@ -9,5 +9,6 @@ void mostrarMapa();
 void moverJogador(char movimento);
 void verificarObjetivo();
 void guardarPontuacao();
+void limparTela();
 
 #endif
